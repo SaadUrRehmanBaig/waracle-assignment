@@ -21,7 +21,7 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/waracle
       - PORT=5000
-      - FE_URL=http://localhost:3000
+      - FE_URL=http://localhost:4200
       - ALLOWED_METHODS=GET,POST,PUT,DELETE
       - ALLOWED_HEADERS=Content-Type,Authorization
     networks:

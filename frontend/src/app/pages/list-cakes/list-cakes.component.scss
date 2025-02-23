@@ -83,6 +83,17 @@ mat-card {
   margin: 16px;
 }
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+mat-spinner {
+  color: #ff4081 !important;  
+}
+
 @media (max-width: 768px) {
   th, td {
     padding: 8px;
