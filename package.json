@@ -1,0 +1,25 @@
+{
+  "name": "waracle",
+  "version": "1.0.0",
+  "description": "This my assignment for waracle app",
+  "main": "index.js",
+  "scripts": {
+    "install:all": "npm --prefix frontend install -f && npm --prefix backend install",
+    "start:frontend": "npm --prefix frontend start",
+    "start:backend": "npm --prefix backend start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaadUrRehmanBaig/waracle-assignment.git"
+  },
+  "author": "Saad Baig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaadUrRehmanBaig/waracle-assignment/issues"
+  },
+  "homepage": "https://github.com/SaadUrRehmanBaig/waracle-assignment#readme",
+  "dependencies": {
+    "@nestjs/mongoose": "^11.0.1",
+    "mongoose": "^8.10.1"
+  }
+}

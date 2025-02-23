@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  mongo:
+    container_name: "mongo"
+    image: "mongo:latest"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - "BE-network"
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.runCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  backend:
+    image: "saadbaig200/waracle-cake:latest"
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/waracle
+      - PORT=5000
+      - FE_URL=http://localhost:3000
+      - ALLOWED_METHODS=GET,POST,PUT,DELETE
+      - ALLOWED_HEADERS=Content-Type,Authorization
+    networks:
+      - "BE-network"
+      - "FE-network"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
+
+networks:
+  FE-network:
+  BE-network:
