@@ -21,5 +21,9 @@ export const routes: Routes = [
     {
         path: 'edit-cakes/:id',
         component: EditCakesComponent
+    },
+    {
+        path: '**',
+        redirectTo: '/list-cakes'
     }
 ];
