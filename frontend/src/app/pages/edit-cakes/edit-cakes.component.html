@@ -1,1 +1,44 @@
-<p>edit-cakes works!</p>
+<mat-card class="cake-form-container">
+    <h2>Edit Cake 🎂</h2>
+
+    <form [formGroup]="cakeForm" (ngSubmit)="updateCake()">
+
+        <!-- Name Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter cake name" />
+            <mat-error *ngIf="cakeForm.get('name')?.hasError('required')">Name is required.</mat-error>
+            <mat-error *ngIf="cakeForm.get('name')?.hasError('minlength')">Must be at least 2 characters.</mat-error>
+        </mat-form-field>
+
+        <!-- Comment Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Comment</mat-label>
+            <textarea matInput formControlName="comment" placeholder="Update the comment"></textarea>
+            <mat-error *ngIf="cakeForm.get('comment')?.hasError('required')">Comment is required.</mat-error>
+            <mat-error *ngIf="cakeForm.get('comment')?.hasError('maxlength')">Max 200 characters allowed.</mat-error>
+        </mat-form-field>
+
+        <!-- Image URL Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Image URL</mat-label>
+            <input matInput formControlName="imageUrl" placeholder="Paste new image URL here" />
+            <mat-error *ngIf="cakeForm.get('imageUrl')?.hasError('required')">Image URL is required.</mat-error>
+            <mat-error *ngIf="cakeForm.get('imageUrl')?.hasError('pattern')">Must be a valid image URL.</mat-error>
+        </mat-form-field>
+
+        <!-- Yum Factor Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Yum Factor (1-5)</mat-label>
+            <input matInput type="number" formControlName="yumFactor" min="1" max="5" />
+            <mat-error *ngIf="cakeForm.get('yumFactor')?.hasError('required')">Yum Factor is required.</mat-error>
+            <mat-error *ngIf="cakeForm.get('yumFactor')?.hasError('min')">Minimum value is 1.</mat-error>
+            <mat-error *ngIf="cakeForm.get('yumFactor')?.hasError('max')">Maximum value is 5.</mat-error>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <button mat-raised-button color="accent" [disabled]="cakeForm.invalid || loading">
+            {{ loading ? 'Updating...' : 'Update Cake' }}
+        </button>
+    </form>
+</mat-card>
