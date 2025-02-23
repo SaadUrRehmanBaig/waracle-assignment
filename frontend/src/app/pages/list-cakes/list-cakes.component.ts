@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ICakeListResponse } from '../../core/interface';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatTooltip } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-cakes',
@@ -19,7 +20,7 @@ export class ListCakesComponent {
   displayedColumns: string[] = ['name', 'comment', 'imageUrl', 'yumFactor', 'actions'];
   dataSource:ICakeListResponse['data'] = [ ];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.http.get<ICakeListResponse>('http://localhost:5000/cakes').subscribe((response) => {
@@ -28,7 +29,13 @@ export class ListCakesComponent {
     });
   }
 
-  editCake(id: string) {}
+  tocCreateCake() {
+    this.router.navigate(['/create-cakes']);
+  }
+
+  editCake(id: string) {
+    this.router.navigate(['/edit-cakes',id]);
+  }
 
   deleteCake(id: string) {
     this.http.delete(`http://localhost:5000/cakes/${id}`).subscribe(() => {
