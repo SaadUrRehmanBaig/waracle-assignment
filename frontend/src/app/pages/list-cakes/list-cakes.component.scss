@@ -94,6 +94,17 @@ mat-spinner {
   color: #ff4081 !important;  
 }
 
+/* Actions Buttons Styling */
+button[mat-icon-button] {
+  margin-right: 10px;
+  font-size: large;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
 @media (max-width: 768px) {
   th, td {
     padding: 8px;

@@ -4,18 +4,19 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClient } from '@angular/common/http';
 import { ICakeListResponse } from '../../core/interface';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-list-cakes',
   standalone: true,
-  imports: [MatTableModule, MatCardModule, MatProgressSpinner],
+  imports: [MatTableModule, MatCardModule, MatProgressSpinner, MatTooltip],
   templateUrl: './list-cakes.component.html',
   styleUrl: './list-cakes.component.scss'
 })
 export class ListCakesComponent {
   
   loading = true;
-  displayedColumns: string[] = ['name', 'comment', 'imageUrl', 'yumFactor'];
+  displayedColumns: string[] = ['name', 'comment', 'imageUrl', 'yumFactor', 'actions'];
   dataSource:ICakeListResponse['data'] = [ ];
 
   constructor(private http: HttpClient) { }
@@ -24,6 +25,14 @@ export class ListCakesComponent {
     this.http.get<ICakeListResponse>('http://localhost:5000/cakes').subscribe((response) => {
       this.loading = false;
       this.dataSource = response.data || [];
+    });
+  }
+
+  editCake(id: string) {}
+
+  deleteCake(id: string) {
+    this.http.delete(`http://localhost:5000/cakes/${id}`).subscribe(() => {
+      this.dataSource = this.dataSource.filter((cake) => cake._id !== id);
     });
   }
   
