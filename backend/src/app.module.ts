@@ -7,6 +7,7 @@ import { validateEnv } from './core/utils';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from '@core/interceptors/transform/transform.interceptor';
 import { LoggerMiddleware } from '@core/middleware/logger/logger.middleware';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { LoggerMiddleware } from '@core/middleware/logger/logger.middleware';
       isGlobal: true,
       validate: validateEnv,
     }),
+    MongooseModule.forRoot(process.env.MONGO_URI),
   ],
   controllers: [AppController],
   providers: [
