@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CakesModule } from './cakes/cakes.module';
@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { validateEnv } from './core/utils';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from '@core/interceptors/transform/transform.interceptor';
+import { LoggerMiddleware } from '@core/middleware/logger/logger.middleware';
 
 @Module({
   imports: [
@@ -24,4 +25,8 @@ import { TransformInterceptor } from '@core/interceptors/transform/transform.int
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
