@@ -15,7 +15,9 @@ services:
       retries: 3
 
   backend:
-    image: "saadbaig200/waracle-cake:latest"
+    # image: "saadbaig200/waracle-cake:latest"
+    build: ./backend
+    container_name: "backend"
     ports:
       - "5000:5000"
     environment:
@@ -29,6 +31,16 @@ services:
       - "FE-network"
     depends_on:
       - mongo
+    
+  frontend:
+    container_name: "frontend"
+    build: ./frontend
+    networks:
+      - "FE-network"
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
 
 volumes:
   mongo_data:

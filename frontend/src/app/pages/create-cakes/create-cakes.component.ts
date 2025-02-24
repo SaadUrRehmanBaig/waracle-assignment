@@ -43,7 +43,7 @@ export class CreateCakesComponent {
       },
       error: (error) => {
         this.loading = false;
-        this.snackBar.open(error.message, 'Close', { duration: 3000 });
+        this.snackBar.open(error.error.message, 'Close', { duration: 3000 });
       }
     });
   }
